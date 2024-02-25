@@ -48,7 +48,7 @@ contract GiveAway is ReentrancyGuard {
         criterial.unitReward = unitReward;
         nextCriterialId++;
     }
-    
+
     function claimReward(uint256 criterialId) external nonReentrant {
       // Check 
       require(isEligible(msg.sender, criterialId), "Not eligible for reward");
