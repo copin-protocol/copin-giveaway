@@ -22,7 +22,7 @@ module.exports = {
     },
   },
   etherscan: {
-    apiKey: process.env.OP_ETHERSCAN_API,
+    apiKey: process.env.ETHERSCAN_API,
     customChains: [
       {
         network: "OPsepolia",
@@ -37,7 +37,7 @@ module.exports = {
   sourcify: {
     enabled: true,
     apiURL: "https://api-sepolia-optimistic.etherscan.io/api",
-    browserURL: "https://sepolia.optimism.io",
+          browserURL: "https://sepolia.optimism.io",
   },
   mocha: {
     timeout: 20000000,

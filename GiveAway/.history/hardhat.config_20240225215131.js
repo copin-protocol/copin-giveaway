@@ -22,7 +22,7 @@ module.exports = {
     },
   },
   etherscan: {
-    apiKey: process.env.OP_ETHERSCAN_API,
+    apiKey: https://api-sepolia-optimistic.etherscan.io/api,
     customChains: [
       {
         network: "OPsepolia",

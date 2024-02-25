@@ -1,6 +1,6 @@
 require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config();
-require("@nomicfoundation/hardhat-verify");
+
 module.exports = {
   solidity: "0.8.24",
   gasReporter: {
@@ -22,22 +22,10 @@ module.exports = {
     },
   },
   etherscan: {
-    apiKey: process.env.OP_ETHERSCAN_API,
-    customChains: [
-      {
-        network: "OPsepolia",
-        chainId: 11155420,
-        urls: {
-          apiURL: "https://api-sepolia-optimistic.etherscan.io/api",
-          browserURL: "https://sepolia.optimism.io",
-        },
-      },
-    ],
+    apiKey: process.env.ETHERSCAN_API,
   },
   sourcify: {
-    enabled: true,
-    apiURL: "https://api-sepolia-optimistic.etherscan.io/api",
-    browserURL: "https://sepolia.optimism.io",
+    enabled: true
   },
   mocha: {
     timeout: 20000000,

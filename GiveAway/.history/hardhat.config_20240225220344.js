@@ -22,7 +22,7 @@ module.exports = {
     },
   },
   etherscan: {
-    apiKey: process.env.OP_ETHERSCAN_API,
+    apiKey: "process.env.ETHERSCAN_API",
     customChains: [
       {
         network: "OPsepolia",
