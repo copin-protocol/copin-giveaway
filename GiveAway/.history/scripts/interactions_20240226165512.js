@@ -1,6 +1,6 @@
 require("dotenv").config();
-const Web3 = require("web3");
-const { ethers } = require("ethers");
+import Web3 from "web3";
+import { ethers } from "ethers";
 const RewardABI = [
   {
     inputs: [],
