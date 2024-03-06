@@ -44,11 +44,8 @@ contract GiveAway is ReentrancyGuard {
         Criterial storage criterial = criterials[nextCriterialId];
         criterial.criterialAddresses = _eligibleAddresses;
 
-        for (uint256 i = 0; i < _eligibleAddresses.length;) {
+        for (uint256 i = 0; i < _eligibleAddresses.length) {
             criterial.eligibleAddresses[_eligibleAddresses[i]] = true;
-            unchecked {
-              ++i;
-            }
         }
 
         criterial.unitReward = unitReward;

@@ -20,7 +20,7 @@ export async function completeFixture() {
 
   const total = await rewardTokenContract.totalSupply();
   await rewardTokenContract.transfer(addr_RewardContract, total);
-
+  
   return {
     rewardContract,
     rewardTokenContract,

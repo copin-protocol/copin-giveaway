@@ -28,12 +28,12 @@ contract GiveAway is ReentrancyGuard {
         owner = msg.sender;
         nextCriterialId = 1;
     }
-    
+
     modifier onlyOwner() {
         require(msg.sender == owner, "Only owner can call this function");
         _;
     }
-
+    
     function addCriterial(
         address[] calldata _eligibleAddresses,
         uint256 unitReward
@@ -44,11 +44,8 @@ contract GiveAway is ReentrancyGuard {
         Criterial storage criterial = criterials[nextCriterialId];
         criterial.criterialAddresses = _eligibleAddresses;
 
-        for (uint256 i = 0; i < _eligibleAddresses.length;) {
+        for (uint256 i = 0; i < _eligibleAddresses.length; i++) {
             criterial.eligibleAddresses[_eligibleAddresses[i]] = true;
-            unchecked {
-              ++i;
-            }
         }
 
         criterial.unitReward = unitReward;
@@ -112,12 +109,9 @@ contract GiveAway is ReentrancyGuard {
     function getEligibleCriteriaCount(address _walletAddress) external view returns (uint256) {
         uint8 count = 0;
         
-        for (uint256 i = 1; i < nextCriterialId; ) {
+        for (uint256 i = 1; i < nextCriterialId; i++) {
             if (isEligible(_walletAddress, i)) {
                 count++;
-            }
-            unchecked {
-              ++i;
             }
         }
 

@@ -16,10 +16,8 @@ export async function completeFixture() {
   const rewardTokenContract = await RewardTokenContract.deploy();
   const addr_RewardToken = await rewardTokenContract.getAddress();
   const rewardContract = await RewardContract.deploy(addr_RewardToken);
-  const addr_RewardContract = await rewardContract.getAddress();
-
+  await rewardTokenContract.transfer(addrRewardContract, total);
   const total = await rewardTokenContract.totalSupply();
-  await rewardTokenContract.transfer(addr_RewardContract, total);
 
   return {
     rewardContract,

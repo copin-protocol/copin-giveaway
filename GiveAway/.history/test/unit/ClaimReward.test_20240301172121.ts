@@ -404,13 +404,13 @@ describe("Reward contract", function () {
         ).to.be.rejectedWith("Reward already claimed");
       });
 
-      // it("Should revert if contract doesn't have enough balance", async function () {
-      //   await rewardContract.addCriterial([wallets[1].address], Number(total) + 100);
+      it("Should revert if contract doesn't have enough balance", async function () {
+        await rewardContract.addCriterial([wallets[1].address], unitReward);
 
-      //   expect(
-      //     await rewardContract.connect(wallets[1]).claimReward(1)
-      //   ).to.be.rejectedWith("Not enough balance");
-      // });
+        await expect(
+          rewardContract.connect(wallets[1]).claimReward(1)
+        ).to.be.rejectedWith("Not enough balance");
+      });
 
       it("Should revert if not enough gas to Claim Reward", async function () {
         await rewardContract.addCriterial(
@@ -578,7 +578,7 @@ describe("Reward contract", function () {
         ).to.be.equal(0);
       });
     });
-    
+
     // ============================================================================================================
     // getCriterial
 

@@ -43,7 +43,7 @@ describe("Reward contract", function () {
 
     describe("Transfer all Reward Token", function () {
       it("Should transfer all tokens from owner to Reward contract", async function () {
-        const addrRewardContract = await rewardContract.getAddress();
+        // const addrRewardContract = await rewardContract.getAddress();
 
         // await rewardTokenContract.transfer(addrRewardContract, total);
 
@@ -79,7 +79,7 @@ describe("Reward contract", function () {
       });
 
       it("Should add a criterial with 200 eligible addresses", async function () {
-        // const addrRewardContract = await rewardContract.getAddress();
+        const addrRewardContract = await rewardContract.getAddress();
 
         // await rewardTokenContract.transfer(addrRewardContract, total);
 
@@ -315,9 +315,9 @@ describe("Reward contract", function () {
       });
 
       it("Should allow 200 eligible users to claim reward", async function () {
-        // const addrRewardContract = await rewardContract.getAddress();
+        const addrRewardContract = await rewardContract.getAddress();
 
-        // await rewardTokenContract.transfer(addrRewardContract, total);
+        await rewardTokenContract.transfer(addrRewardContract, total);
 
         const claims: string[] = [];
         const signers = await ethers.getSigners();
@@ -346,9 +346,9 @@ describe("Reward contract", function () {
       });
 
       it("Should emit ClaimMade event", async function () {
-        // const addrRewardContract = await rewardContract.getAddress();
+        const addrRewardContract = await rewardContract.getAddress();
 
-        // await rewardTokenContract.transfer(addrRewardContract, total);
+        await rewardTokenContract.transfer(addrRewardContract, total);
 
         const claims: string[] = [];
         const signers = await ethers.getSigners();
@@ -382,9 +382,9 @@ describe("Reward contract", function () {
       });
 
       it("Should revert if user is not eligible", async function () {
-        // const addrRewardContract = await rewardContract.getAddress();
+        const addrRewardContract = await rewardContract.getAddress();
 
-        // await rewardTokenContract.transfer(addrRewardContract, total);
+        await rewardTokenContract.transfer(addrRewardContract, total);
 
         await expect(
           rewardContract.connect(wallets[1]).claimReward(1)
@@ -392,10 +392,10 @@ describe("Reward contract", function () {
       });
 
       it("Should revert if reward already claimed", async function () {
+        // Transfer tokens to the reward contract
+        const addrRewardContract = await rewardContract.getAddress();
 
-        // const addrRewardContract = await rewardContract.getAddress();
-
-        // await rewardTokenContract.transfer(addrRewardContract, total);
+        await rewardTokenContract.transfer(addrRewardContract, total);
         await rewardContract.addCriterial([wallets[1].address], unitReward);
         await rewardContract.connect(wallets[1]).claimReward(1);
 
@@ -404,13 +404,13 @@ describe("Reward contract", function () {
         ).to.be.rejectedWith("Reward already claimed");
       });
 
-      // it("Should revert if contract doesn't have enough balance", async function () {
-      //   await rewardContract.addCriterial([wallets[1].address], Number(total) + 100);
+      it("Should revert if contract doesn't have enough balance", async function () {
+        await rewardContract.addCriterial([wallets[1].address], unitReward);
 
-      //   expect(
-      //     await rewardContract.connect(wallets[1]).claimReward(1)
-      //   ).to.be.rejectedWith("Not enough balance");
-      // });
+        await expect(
+          rewardContract.connect(wallets[1]).claimReward(1)
+        ).to.be.rejectedWith("Not enough balance");
+      });
 
       it("Should revert if not enough gas to Claim Reward", async function () {
         await rewardContract.addCriterial(
@@ -429,9 +429,9 @@ describe("Reward contract", function () {
         ).to.be.rejectedWith("but got 1000");
       });
       it("Should revert if not enough gas to Claim Reward with 200 eligible addresses", async function () {
-        // const addrRewardContract = await rewardContract.getAddress();
+        const addrRewardContract = await rewardContract.getAddress();
 
-        // await rewardTokenContract.transfer(addrRewardContract, total);
+        await rewardTokenContract.transfer(addrRewardContract, total);
 
         const eligibleAddresses = wallets.slice(0, 200);
         const addresses: string[] = [];
@@ -500,9 +500,9 @@ describe("Reward contract", function () {
 
     describe("Check userClaimed", function () {
       it("Should return true if user claimed reward", async function () {
-        // const addrRewardContract = await rewardContract.getAddress();
+        const addrRewardContract = await rewardContract.getAddress();
 
-        // await rewardTokenContract.transfer(addrRewardContract, total);
+        await rewardTokenContract.transfer(addrRewardContract, total);
 
         await rewardContract.addCriterial([wallets[1].address], unitReward);
         await rewardContract.connect(wallets[1]).claimReward(1);
@@ -513,7 +513,7 @@ describe("Reward contract", function () {
       });
 
       it("Should return false if user not claim reward yet", async function () {
-        // const addrRewardContract = await rewardContract.getAddress();
+        const addrRewardContract = await rewardContract.getAddress();
 
         // await rewardTokenContract.transfer(addrRewardContract, total);
 
@@ -525,7 +525,7 @@ describe("Reward contract", function () {
       });
 
       it("Should revert if Address Not eligible for reward to check userClaimed", async function () {
-        // const addrRewardContract = await rewardContract.getAddress();
+        const addrRewardContract = await rewardContract.getAddress();
 
         // await rewardTokenContract.transfer(addrRewardContract, total);
 
@@ -538,7 +538,7 @@ describe("Reward contract", function () {
       });
 
       it("Should revert if Criterial does not exist to check userClaimed", async function () {
-        // const addrRewardContract = await rewardContract.getAddress();
+        const addrRewardContract = await rewardContract.getAddress();
 
         // await rewardTokenContract.transfer(addrRewardContract, total);
 
@@ -578,7 +578,7 @@ describe("Reward contract", function () {
         ).to.be.equal(0);
       });
     });
-    
+
     // ============================================================================================================
     // getCriterial
 
